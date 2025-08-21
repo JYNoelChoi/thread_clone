@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:faker/faker.dart' hide Image;
+import 'package:thread_clone/main_nav/thread_page/widgets/bottom_sheet_menu.dart';
 
 class Thread extends StatelessWidget {
   final int randSeed;
@@ -46,12 +47,37 @@ class Thread extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        username,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            username,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '${faker.randomGenerator.integer(60, min: 1)}m',
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                              const SizedBox(width: 8),
+                              IconButton(
+                                icon: const Icon(Icons.more_horiz, color: Colors.grey),
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) => const BottomSheetMenu(),
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.white,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       SizedBox(height: 2),
                       Text(
