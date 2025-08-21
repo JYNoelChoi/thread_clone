@@ -72,6 +72,11 @@ class Thread extends StatelessWidget {
                                     builder: (context) => const BottomSheetMenu(),
                                     isScrollControlled: true,
                                     backgroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(20),
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
