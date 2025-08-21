@@ -26,25 +26,27 @@ class _ThreadScreenState extends State<ThreadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(vertical: Sizes.size10),
-          width: double.infinity,
-          child: FaIcon(FontAwesomeIcons.threads, size: Sizes.size36),
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: FaIcon(
+            FontAwesomeIcons.threads,
+            size: Sizes.size36,
+          ),
+          centerTitle: true,
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Sizes.size10,
-                vertical: Sizes.size10,
-              ),
-              child: Column(
-                children: [for (var seed in seeds) Thread(randSeed: seed)],
-              ),
-            ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Sizes.size10,
+                  vertical: Sizes.size10,
+                ),
+                child: Thread(randSeed: seeds[index]),
+              );
+            },
+            childCount: seeds.length,
           ),
         ),
       ],

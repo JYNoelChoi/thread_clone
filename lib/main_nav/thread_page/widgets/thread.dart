@@ -15,7 +15,7 @@ class Thread extends StatelessWidget {
     // Define a set of URL-safe characters.
     const safeChars = 'abcdefghijklmnopqrstuvwxyz0123456789';
     final String username = faker.internet.userName();
-    final String avatarUrl = 'https://picsum.photos/seed/$username/100/100';
+    final String avatarUrl = faker.image.loremPicsum(seed: username);
     final String threadText = faker.lorem.sentences(3).join(' ');
     // Generate a 10-character string using only the characters from the set.
 
@@ -65,11 +65,15 @@ class Thread extends StatelessWidget {
                               ),
                               const SizedBox(width: 8),
                               IconButton(
-                                icon: const Icon(Icons.more_horiz, color: Colors.grey),
+                                icon: const Icon(
+                                  Icons.more_horiz,
+                                  color: Colors.grey,
+                                ),
                                 onPressed: () {
                                   showModalBottomSheet(
                                     context: context,
-                                    builder: (context) => const BottomSheetMenu(),
+                                    builder: (context) =>
+                                        const BottomSheetMenu(),
                                     isScrollControlled: true,
                                     backgroundColor: Colors.white,
                                     shape: const RoundedRectangleBorder(

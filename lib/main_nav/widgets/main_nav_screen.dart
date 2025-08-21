@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/main_nav/thread_page/widgets/thread_screen.dart';
 import 'package:thread_clone/main_nav/widgets/navigation_tab.dart';
+import 'package:thread_clone/main_nav/widgets/write_thread_sheet.dart';
 
 class MainNavScreen extends StatefulWidget {
   const MainNavScreen({super.key});
@@ -20,6 +21,14 @@ class _MainNavScreenState extends State<MainNavScreen> {
     });
   }
 
+  void _onWriteTap() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => const WriteThreadSheet(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,20 +43,14 @@ class _MainNavScreenState extends State<MainNavScreen> {
               Offstage(offstage: _selectedIndex != 0, child: ThreadScreen()),
               Offstage(
                 offstage: _selectedIndex != 1,
-                child: Center(
-                  child: const Text("Search", style: TextStyle(fontSize: 20)),
-                ),
-              ),
-              Offstage(
-                offstage: _selectedIndex != 2,
-                child: Center(
-                  child: const Text("Write", style: TextStyle(fontSize: 20)),
+                child: const Center(
+                  child: Text("Search", style: TextStyle(fontSize: 20)),
                 ),
               ),
               Offstage(
                 offstage: _selectedIndex != 3,
-                child: Center(
-                  child: const Text(
+                child: const Center(
+                  child: Text(
                     "Favorites",
                     style: TextStyle(fontSize: 20),
                   ),
@@ -55,8 +58,8 @@ class _MainNavScreenState extends State<MainNavScreen> {
               ),
               Offstage(
                 offstage: _selectedIndex != 4,
-                child: Center(
-                  child: const Text("User", style: TextStyle(fontSize: 20)),
+                child: const Center(
+                  child: Text("User", style: TextStyle(fontSize: 20)),
                 ),
               ),
             ],
@@ -64,7 +67,6 @@ class _MainNavScreenState extends State<MainNavScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        // color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -84,7 +86,7 @@ class _MainNavScreenState extends State<MainNavScreen> {
               icon: FontAwesomeIcons.penToSquare,
               selectedIcon: FontAwesomeIcons.solidPenToSquare,
               isSelected: _selectedIndex == 2,
-              onTap: () => _onTap(2),
+              onTap: _onWriteTap,
             ),
             NavTab(
               icon: FontAwesomeIcons.heart,
